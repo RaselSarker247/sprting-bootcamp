@@ -26,9 +26,9 @@ public class HelloController {
         employee.setFirstName("Meftaul");
         employee.setLastName("Haque");
 
-        Long id = employeeService.insertEmployee(employee);
 
-        return id;
+
+        return 1L;
 
     }
 

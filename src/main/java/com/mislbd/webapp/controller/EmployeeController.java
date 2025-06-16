@@ -5,6 +5,7 @@ import com.mislbd.webapp.dto.EmployeeRecord;
 import com.mislbd.webapp.entity.Employee;
 import com.mislbd.webapp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,13 +29,13 @@ public class EmployeeController {
     }
 
     @GetMapping
-    private List<EmployeeDto> getEmployees() {
-//        return employeeService.getAllEmployees();
-        return List.of(
-                new EmployeeDto(1L, "Meftaul", "Haque"),
-                new EmployeeDto(2L, "John", "Doe"),
-                new EmployeeDto(3L, "Jane", "Smith")
-        );
+    private List<Employee> getEmployees() {
+        return employeeService.findAll();
+//        return List.of(
+//                new EmployeeDto(1L, "Meftaul", "Haque"),
+//                new EmployeeDto(2L, "John", "Doe"),
+//                new EmployeeDto(3L, "Jane", "Smith")
+//        );
     }
 
     @GetMapping("/{empId}")
@@ -54,6 +55,16 @@ public class EmployeeController {
     public ResponseEntity<Employee> saveEmployee(@RequestBody EmployeeRecord employeeRecord) {
         Employee savedEmployee = employeeService.saveEmployee(employeeRecord);
         return ResponseEntity.ok(savedEmployee);
+    }
+    @PutMapping
+    public ResponseEntity<String> updateEmployee(@RequestBody EmployeeRecord employeeRecord) {
+        employeeService.updateEmployee(employeeRecord);
+        return new ResponseEntity<>("Employee Updated successfully", HttpStatus.OK);
+    }
+    @DeleteMapping
+    public ResponseEntity<String> deleteEmployee(@RequestParam Long employeeId) {
+        employeeService.deleteEmployeeById(employeeId);
+        return new ResponseEntity<>("Employee Deleted successfully", HttpStatus.OK);
     }
 
 }
