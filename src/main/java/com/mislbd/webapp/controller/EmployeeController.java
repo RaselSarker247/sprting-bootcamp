@@ -61,6 +61,7 @@ public class EmployeeController {
         employeeService.updateEmployee(employeeRecord);
         return new ResponseEntity<>("Employee Updated successfully", HttpStatus.OK);
     }
+    // Delete using Request Param like localhost:8080/emp?empId=123
     @DeleteMapping
     public ResponseEntity<String> deleteEmployee(@RequestParam Long employeeId) {
         employeeService.deleteEmployeeById(employeeId);
