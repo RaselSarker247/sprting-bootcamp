@@ -1,5 +1,6 @@
 package com.mislbd.webapp.service;
 
+import com.mislbd.webapp.dto.EmployeeRecord;
 import com.mislbd.webapp.entity.Employee;
 import com.mislbd.webapp.repsitory.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,10 @@ public class EmployeeService {
     public Long insertEmployee(Employee employee) {
         Employee newEmployee = employeeRepository.save(employee);
         return newEmployee.getEmployeeId();
+    }
+    public Employee saveEmployee(EmployeeRecord dto) {
+        Employee entity = new Employee(dto.employeeId(), dto.firstName(), dto.lastName());
+        return employeeRepository.save(entity);
     }
 
 }

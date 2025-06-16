@@ -2,12 +2,17 @@ spring:
   application:
     name: webapp
   datasource:
-    url: jdbc:h2:file:./data/mydb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+#    url: jdbc:h2:file:./data/mydb
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#    password:
+    url: jdbc:oracle:thin:@//localhost:1521/freepdb1
+    username: springboot1
+    password: springboot1
+    driver-class-name: oracle.jdbc.OracleDriver
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+   # database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.OracleDialect
     hibernate:
       ddl-auto: update
     show-sql: true
@@ -16,4 +21,4 @@ spring:
       enabled: true
       path: /h2-console
 server:
-  port: 8081
+  port: 8083

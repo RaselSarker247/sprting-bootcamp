@@ -1,6 +1,8 @@
 package com.mislbd.webapp.controller;
 
 import com.mislbd.webapp.dto.EmployeeDto;
+import com.mislbd.webapp.dto.EmployeeRecord;
+import com.mislbd.webapp.entity.Employee;
 import com.mislbd.webapp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -41,12 +43,17 @@ public class EmployeeController {
         return new EmployeeDto(empId, "Sample", "Employee");
     }
 
+//    @PostMapping
+//    private Long insertEmployee(@RequestBody EmployeeDto employeeDto) {
+//        // Convert EmployeeDto to Employee entity if needed
+//        // Employee employee = new Employee(employeeDto.getEmployeeId(), employeeDto.getFirstName(), employeeDto.getLastName());
+//        // return employeeService.insertEmployee(employee);
+//        return 1L; // Simulating insertion and returning the new employee ID
+//    }
     @PostMapping
-    private Long insertEmployee(@RequestBody EmployeeDto employeeDto) {
-        // Convert EmployeeDto to Employee entity if needed
-        // Employee employee = new Employee(employeeDto.getEmployeeId(), employeeDto.getFirstName(), employeeDto.getLastName());
-        // return employeeService.insertEmployee(employee);
-        return 1L; // Simulating insertion and returning the new employee ID
+    public ResponseEntity<Employee> saveEmployee(@RequestBody EmployeeRecord employeeRecord) {
+        Employee savedEmployee = employeeService.saveEmployee(employeeRecord);
+        return ResponseEntity.ok(savedEmployee);
     }
 
 }
